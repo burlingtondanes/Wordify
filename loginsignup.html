@@ -9,7 +9,7 @@
 <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 <style type="text/css">
 body{
-	background-color: #AB47BC
+  background-color: #AB47BC
 }
 .mdl-layout__drawer{
   background-color: #D1C4E9
@@ -66,6 +66,24 @@ header.custom-header {
             <span class="mdl-layout-title"></span>
             <div class="mdl-layout-spacer navbar-fixed"></div>
             <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <script src="https://cdn.rawgit.com/naptha/tesseract.js/0.2.0/dist/tesseract.js">
+            function runOCR(url) {
+    Tesseract.recognize(url)
+         .then(function(result) {
+            document.getElementById("ocr_results")
+                    .innerText = result.text;
+         }).progress(function(result) {
+            document.getElementById("ocr_status")
+                    .innerText = result["status"] + " (" +
+                        (result["progress"] * 100) + "%)";
+        });
+}
+document.getElementById("go_button")
+        .addEventListener("click", function(e) {
+            var url = document.getElementById("url").value;
+            runOCR(url);
+        });
+</script>
                 
             </nav>
         </div>
@@ -83,9 +101,93 @@ header.custom-header {
         <div class="page-content"><!-- Your content goes here --></div>
     </main>
 </div>
-	
+<p>
+<center>
+  <input type="text" id="url" placeholder="Image URL" />
+<input type="button" id="go_button" value="Run" />
+<div id="ocr_results"> </div>
+<div id="ocr_status"> </div>
+</center>
+</p>
+<style>
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn,.signupbtn {
+    float: left;
+    width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+       width: 100%;
+    }
+}
+</style>
+<body>
+
+<h2>Signup Form</h2>
+
+<form action="/action_page.php" style="border:1px solid #ccc">
+  <div class="container">
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <input type="checkbox" checked="checked"> Remember me
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>
 
 
 
 </body>
+
 </html>

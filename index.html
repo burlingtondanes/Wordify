@@ -83,7 +83,24 @@ div.desc{
             <span class="mdl-layout-title"></span>
             <div class="mdl-layout-spacer navbar-fixed"></div>
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-            
+            <script src="https://cdn.rawgit.com/naptha/tesseract.js/0.2.0/dist/tesseract.js">
+            function runOCR(url) {
+    Tesseract.recognize(url)
+         .then(function(result) {
+            document.getElementById("ocr_results")
+                    .innerText = result.text;
+         }).progress(function(result) {
+            document.getElementById("ocr_status")
+                    .innerText = result["status"] + " (" +
+                        (result["progress"] * 100) + "%)";
+        });
+}
+document.getElementById("go_button")
+        .addEventListener("click", function(e) {
+            var url = document.getElementById("url").value;
+            runOCR(url);
+        });
+</script>
                 
             </nav>
         </div>
@@ -94,7 +111,7 @@ div.desc{
             <a class="mdl-navigation__link" href="index.html"><font size="4">Home</font></a>
             <a class="mdl-navigation__link" href="scanner.html"><font size="4">Scanner</font></a>
             <a class="mdl-navigation__link" href="my scans.html"><font size="4">My Scans</font></a>
-
+            <a class="mdl-navigation__link" href="loginsignup.html"><font size="4">Login/SignUp</font></a>
         </nav>
     </div>
     <p></p>

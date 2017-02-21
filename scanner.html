@@ -1,5 +1,6 @@
 <html>
   <head>
+  <
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -7,9 +8,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
 <style type="text/css">
 body{
-	background-color: #AB47BC
+  background-image: url("http://wallpapercave.com/wp/XvOVKpu.png")
 }
 .mdl-layout__drawer{
   background-color: #D1C4E9
@@ -57,6 +59,23 @@ header.custom-header {
   background: #212121;
   position: fixed;
 }
+.jumbotron{
+  background-color: #CE93D8
+}
+
+div.desc{
+    background-color: #000;
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    opacity: 0.5;
+    width: 69%;
+}
+
+.fix{
+    width: 100%;
+    padding: 0px;
+}
 </style>
 </head>
 <body>
@@ -66,6 +85,24 @@ header.custom-header {
             <span class="mdl-layout-title"></span>
             <div class="mdl-layout-spacer navbar-fixed"></div>
             <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <script src="https://cdn.rawgit.com/naptha/tesseract.js/0.2.0/dist/tesseract.js">
+            function runOCR(cameraInput) {
+    Tesseract.recognize(cameraInput)
+         .then(function(result) {
+            document.getElementById("ocr_results")
+                    .innerText = result.text;
+         }).progress(function(result) {
+            document.getElementById("ocr_status")
+                    .innerText = result["status"] + " (" +
+                        (result["progress"] * 100) + "%)";
+        });
+}
+document.getElementById("go_button")
+        .addEventListener("click", function(e) {
+            var cameraInput = document.getElementById("cameraInput").value;
+            runOCR(cameraInput);
+        });
+</script>
                 
             </nav>
         </div>
@@ -79,13 +116,73 @@ header.custom-header {
 
         </nav>
     </div>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+
     <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here --></div>
+        <div class="page-content">
+        
+        <div class="container">
+        <center>
+          <div class="jumbotron">
+        <center>
+        <h1>Scanner</h1>
+        <p>File:</p>
+          <input type="file" capture="camera" accept="image/*" id="cameraInput" name=cameraInput />
+<input type="button" id="go_button" value="Run" />
+<div id="ocr_results"> </div>
+<div id="ocr_status"> </div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+        <p>URL:</p>
+        <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'>
+          
+function runOCR(url) {
+    Tesseract.recognize(url)
+         .then(function(result) {
+            document.getElementById("ocr_results")
+                    .innerText = result.text;
+         }).progress(function(result) {
+            document.getElementById("ocr_status")
+                    .innerText = result["status"] + " (" +
+                        (result["progress"] * 100) + "%)";
+        });
+}
+document.getElementById("go_button")
+        .addEventListener("click", function(e) {
+            var url = document.getElementById("url").value;
+            runOCR(url);
+        });
+
+        </script>
+        <input type="text" id="url" placeholder="Image URL" />
+<input type="button" id="go_button" value="Run" />
+<div id="ocr_results"> </div>
+<div id="ocr_status"> </div>
+          </center>
+        </div>
+
+</figure>
+  
+  </center>
+</div>
+
+
+
+
+
+        </div>
     </main>
 </div>
-	
+
 
 
 
 </body>
+
 </html>

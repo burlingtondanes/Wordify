@@ -85,24 +85,7 @@ div.desc{
             <span class="mdl-layout-title"></span>
             <div class="mdl-layout-spacer navbar-fixed"></div>
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <script src="https://cdn.rawgit.com/naptha/tesseract.js/0.2.0/dist/tesseract.js">
-            function runOCR(cameraInput) {
-    Tesseract.recognize(cameraInput)
-         .then(function(result) {
-            document.getElementById("ocr_results")
-                    .innerText = result.text;
-         }).progress(function(result) {
-            document.getElementById("ocr_status")
-                    .innerText = result["status"] + " (" +
-                        (result["progress"] * 100) + "%)";
-        });
-}
-document.getElementById("go_button")
-        .addEventListener("click", function(e) {
-            var cameraInput = document.getElementById("cameraInput").value;
-            runOCR(cameraInput);
-        });
-</script>
+            
                 
             </nav>
         </div>
@@ -130,11 +113,7 @@ document.getElementById("go_button")
           <div class="jumbotron">
         <center>
         <h1>Scanner</h1>
-        <p>File:</p>
-          <input type="file" capture="camera" accept="image/*" id="cameraInput" name=cameraInput />
-<input type="button" id="go_button" value="Run" />
-<div id="ocr_results"> </div>
-<div id="ocr_status"> </div>
+
 <p></p>
 <p></p>
 <p></p>

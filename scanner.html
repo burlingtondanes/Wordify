@@ -115,26 +115,7 @@ div.desc{
 <p></p>
 <p></p>
         <p>URL:</p>
-        <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'>
-          
-function runOCR(url) {
-    Tesseract.recognize(url)
-         .then(function(result) {
-            document.getElementById("ocr_results")
-                    .innerText = result.text;
-         }).progress(function(result) {
-            document.getElementById("ocr_status")
-                    .innerText = result["status"] + " (" +
-                        (result["progress"] * 100) + "%)";
-        });
-}
-document.getElementById("go_button")
-        .addEventListener("click", function(e) {
-            var url = document.getElementById("url").value;
-            runOCR(url);
-        });
 
-        </script>
         <input type="text" id="url" placeholder="Image URL" />
 <input type="button" id="go_button" value="Run" />
 <div id="ocr_results"> </div>
@@ -157,5 +138,25 @@ document.getElementById("go_button")
 
 
 </body>
+        <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'>
+          
+function runOCR(url) {
+    Tesseract.recognize(url)
+         .then(function(result) {
+            document.getElementById("ocr_results")
+                    .innerText = result.text;
+         }).progress(function(result) {
+            document.getElementById("ocr_status")
+                    .innerText = result["status"] + " (" +
+                        (result["progress"] * 100) + "%)";
+        });
+}
+document.getElementById("go_button")
+        .addEventListener("click", function(e) {
+            var url = document.getElementById("url").value;
+            runOCR(url);
+        });
+
+        </script>
 
 </html>
